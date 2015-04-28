@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
 using System.Diagnostics;
+using System.Threading;
 
 namespace BotLibNet2
 {
@@ -20,41 +21,17 @@ namespace BotLibNet2
             this.process = proc;
         }
 
-        public Color GetPixelColor(Point pos)
+        public Color GetPixelColor(Point pos, bool foregroundMode = false)
         {
-            return GetWindowImage().GetPixel(pos.X, pos.Y);
+            return GetWindowImage(foregroundMode).GetPixel(pos.X, pos.Y);
         }
 
-        public Bitmap CaptureRegion(Rectangle region)
+        public Bitmap CaptureRegion(Rectangle region, bool foregroundMode = false)
         {
-            return GetWindowImage().Clone(new Rectangle(region.X, region.Y, region.Width, region.Height), PixelFormat.Format32bppArgb);
+            return GetWindowImage(foregroundMode).Clone(new Rectangle(region.X, region.Y, region.Width, region.Height), PixelFormat.Format32bppArgb);
         }
 
         #region GetScreenImage
-
-        [DllImport("user32.dll")]
-        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
-        [DllImport("user32.dll")]
-        public static extern bool PrintWindow(IntPtr hWnd, IntPtr hdcBlt, int nFlags);
-        public Bitmap GetWindowImage(bool foregroundMode = false)
-        {
-            if (!foregroundMode)
-            {
-                RECT rc;
-                GetWindowRect(process, out rc);
-                Bitmap bmp = new Bitmap(rc.Width, rc.Height, PixelFormat.Format32bppArgb);
-                Graphics gfxBmp = Graphics.FromImage(bmp);
-                IntPtr hdcBitmap = gfxBmp.GetHdc();
-                PrintWindow(process, hdcBitmap, 0);
-                gfxBmp.ReleaseHdc(hdcBitmap);
-                gfxBmp.Dispose();
-                return bmp;
-            }
-            else
-            {
-                return null; //TODO
-            }
-        }
 
         [StructLayout(LayoutKind.Sequential)]
         public struct RECT
@@ -181,6 +158,48 @@ namespace BotLibNet2
                 return false;
             }
         }
+
+        [DllImport("user32.dll")]
+        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+        [DllImport("user32.dll")]
+        public static extern bool PrintWindow(IntPtr hWnd, IntPtr hdcBlt, int nFlags);
+        [DllImport("user32.dll")]
+        private static extern int SetForegroundWindow(IntPtr hWnd);
+        private const int SW_RESTORE = 9;
+        [DllImport("user32.dll")]
+        private static extern IntPtr ShowWindow(IntPtr hWnd, int nCmdShow);
+        /*[DllImport("user32.dll")]
+        public static extern IntPtr GetWindowRect(IntPtr hWnd, ref Rect rect);*/
+        public Bitmap GetWindowImage(bool foregroundMode = false)
+        {
+            if (!foregroundMode)
+            {
+                RECT rc;
+                GetWindowRect(process, out rc);
+                Bitmap bmp = new Bitmap(rc.Width, rc.Height, PixelFormat.Format32bppArgb);
+                Graphics gfxBmp = Graphics.FromImage(bmp);
+                IntPtr hdcBitmap = gfxBmp.GetHdc();
+                PrintWindow(process, hdcBitmap, 0);
+                gfxBmp.ReleaseHdc(hdcBitmap);
+                gfxBmp.Dispose();
+                return bmp;
+            }
+            else
+            {
+                SetForegroundWindow(process);
+                ShowWindow(process, SW_RESTORE);
+                Thread.Sleep(500);
+                RECT rect = new RECT();
+                GetWindowRect(process, out rect);
+                int width = rect.Right - rect.Left;
+                int height = rect.Bottom - rect.Top;
+                Bitmap bmp = new Bitmap(width, height, PixelFormat.Format32bppArgb);
+                Graphics.FromImage(bmp).CopyFromScreen(rect.Left, rect.Top, 0, 0, new Size(width, height), CopyPixelOperation.SourceCopy);
+                return bmp;
+            }
+        }
+
+        
         #endregion
 
     }
