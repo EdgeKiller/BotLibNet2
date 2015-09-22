@@ -8,10 +8,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("BotLibNet 2")]
 [assembly: AssemblyDescription("Library for bot making in .net")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ValdGeorgio")]
+[assembly: AssemblyCompany("EdgeKiller")]
 [assembly: AssemblyProduct("BotLibNet 2")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
-[assembly: AssemblyTrademark("ValdGeorgio")]
+[assembly: AssemblyCopyright("No copyright, liberty is better !")]
+[assembly: AssemblyTrademark("EdgeKiller")]
 [assembly: AssemblyCulture("")]
 
 // L'affectation de la valeur false à ComVisible rend les types invisibles dans cet assembly 

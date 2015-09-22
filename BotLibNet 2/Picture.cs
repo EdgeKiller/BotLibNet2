@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using System.Drawing.Imaging;
-using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace BotLibNet2
@@ -162,14 +156,14 @@ namespace BotLibNet2
         [DllImport("user32.dll")]
         public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
         [DllImport("user32.dll")]
+        static extern bool InvalidateRect(IntPtr hWnd, IntPtr lpRect, bool bErase);
+        [DllImport("user32.dll")]
         public static extern bool PrintWindow(IntPtr hWnd, IntPtr hdcBlt, int nFlags);
         [DllImport("user32.dll")]
         private static extern int SetForegroundWindow(IntPtr hWnd);
         private const int SW_RESTORE = 9;
         [DllImport("user32.dll")]
         private static extern IntPtr ShowWindow(IntPtr hWnd, int nCmdShow);
-        /*[DllImport("user32.dll")]
-        public static extern IntPtr GetWindowRect(IntPtr hWnd, ref Rect rect);*/
         public Bitmap GetWindowImage(bool foregroundMode = false)
         {
             if (!foregroundMode)
@@ -201,6 +195,5 @@ namespace BotLibNet2
 
         
         #endregion
-
     }
 }
