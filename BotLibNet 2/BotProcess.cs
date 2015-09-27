@@ -24,13 +24,9 @@ namespace BotLibNet2
             }
         }
 
-        public static bool processExist(string processName)
+        public static bool ProcessExist(string processName)
         {
-            Process[] processesList = Process.GetProcessesByName(processName);
-            if (processesList.Length > 0)
-                return true;
-            else
-                return false;
+            return (Process.GetProcessesByName(processName).Length > 0) ? true : false;
         }
 
     }

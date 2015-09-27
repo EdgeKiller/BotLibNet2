@@ -31,6 +31,16 @@ namespace BotLibNet2
             Point position = new Point(WinRect.Left, WinRect.Top);
             return position;
         }
+
+        public int GetX()
+        {
+            return GetPosition().X;
+        }
+
+        public int GetY()
+        {
+            return GetPosition().Y;
+        }
         #endregion
 
         #region SetPosition
@@ -39,6 +49,11 @@ namespace BotLibNet2
         public bool SetPosition(int x, int y)
         {
             return SetWindowPos(process, IntPtr.Zero, x, y, 0, 0, 5);
+        }
+
+        public bool SetPosition(Point pos)
+        {
+            return SetWindowPos(process, IntPtr.Zero, pos.X, pos.Y, 0, 0, 5);
         }
         #endregion
 
@@ -52,6 +67,16 @@ namespace BotLibNet2
             Size size = new Size(width, height);
             return size;
         }
+
+        public int GetWidth()
+        {
+            return GetSize().Width;
+        }
+
+        public int GetHeight()
+        {
+            return GetSize().Height;
+        }
         #endregion
 
         #region SetSize
@@ -59,7 +84,12 @@ namespace BotLibNet2
         private static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
         public bool SetSize(int width, int height)
         {
-            return MoveWindow(process, GetPosition().X, GetPosition().Y, width, height, true);
+            return MoveWindow(process, GetX(), GetY(), width, height, true);
+        }
+
+        public bool SetSize(Size size)
+        {
+            return MoveWindow(process, GetX(), GetY(), size.Width, size.Height, true);
         }
         #endregion
 
@@ -76,6 +106,5 @@ namespace BotLibNet2
             return true;
         }
         #endregion
-
     }
 }
