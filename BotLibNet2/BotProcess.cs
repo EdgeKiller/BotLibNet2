@@ -1,11 +1,16 @@
-﻿using System;
+﻿/*
+ * Created by SharpDevelop.
+ * User: EdgeKiller
+ * Date: 03/10/2015
+ */
+using System;
 using System.Diagnostics;
 
 namespace BotLibNet2
 {
-    public class BotProcess
-    {
-        public BotKeyboard keyboard;
+	public class BotProcess
+	{
+		public BotKeyboard keyboard;
         public BotMouse mouse;
         public BotWindow window;
         public BotImage image;
@@ -28,6 +33,5 @@ namespace BotLibNet2
         {
             return (Process.GetProcessesByName(processName).Length > 0) ? true : false;
         }
-
-    }
+	}
 }

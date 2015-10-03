@@ -1,13 +1,18 @@
-﻿using System;
+﻿/*
+ * Created by SharpDevelop.
+ * User: EdgeKiller
+ * Date: 03/10/2015
+ */
+using System;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace BotLibNet2
 {
-    public class BotKeyboard
-    {
-        private IntPtr process;
+	public class BotKeyboard
+	{
+		private IntPtr process;
 
         public BotKeyboard(IntPtr proc)
         {
@@ -61,5 +66,5 @@ namespace BotLibNet2
             }
         }
         #endregion
-    }
+	}
 }

@@ -1,20 +1,25 @@
-﻿using System;
+﻿/*
+ * Created by SharpDevelop.
+ * User: EdgeKiller
+ * Date: 03/10/2015
+ */
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace BotLibNet2
 {
-    public struct Rect
+	public struct Rect
     {
         public int Left { get; set; }
         public int Top { get; set; }
         public int Right { get; set; }
         public int Bottom { get; set; }
     }
-
-    public class BotWindow
-    {
-        private IntPtr process;
+	
+	public class BotWindow
+	{
+		private IntPtr process;
 
         public BotWindow(IntPtr proc)
         {
@@ -106,5 +111,5 @@ namespace BotLibNet2
             return true;
         }
         #endregion
-    }
+	}
 }

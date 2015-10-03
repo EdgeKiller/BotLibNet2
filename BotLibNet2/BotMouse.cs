@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Created by SharpDevelop.
+ * User: EdgeKiller
+ * Date: 03/10/2015
+ */
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -6,17 +11,16 @@ using System.Windows.Forms;
 
 namespace BotLibNet2
 {
-
-    public enum WButton
+	public enum WButton
     {
         Left,
         Right,
         Middle
     }
 
-    public class BotMouse
-    {
-        private IntPtr process;
+	public class BotMouse
+	{
+		 private IntPtr process;
 
         public BotMouse(IntPtr proc)
         {
@@ -195,6 +199,5 @@ namespace BotLibNet2
         }
         #endregion
 
-    }
-
+	}
 }

@@ -1,5 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*
+ * Created by SharpDevelop.
+ * User: EdgeKiller
+ * Date: 03/10/2015
+ */
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -7,9 +11,10 @@ using System.Threading;
 
 namespace BotLibNet2
 {
-    public class BotImage
-    {
-        private IntPtr process;
+	public class BotImage
+	{
+		
+		private IntPtr process;
 
         public BotImage(IntPtr proc)
         {
@@ -196,8 +201,6 @@ namespace BotLibNet2
 
 
         #endregion
-
-
 
 
         #region Static
@@ -408,5 +411,6 @@ namespace BotLibNet2
         }*/
 
         #endregion
-    }
+		
+	}
 }

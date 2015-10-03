@@ -7,7 +7,7 @@ BotLibNet2
 
 **Which programming language is used ?**
 
-- It's coded in C# with the .NET framework on Visual Studio 2013 Ultimate.
+- It's coded in C# with the .NET framework on SharpDevelop 5.1
 
 **Which language is compatible with this library ?**
 
@@ -19,5 +19,3 @@ BotLibNet2
 
 Next Things To Do :
 ===================
-
-- Screenshot with foreground mode 
