@@ -205,8 +205,10 @@ namespace BotLibNet2
 
         #region Static
 
-        public static Rectangle SearchBitmap(Bitmap smallBmp, Bitmap bigBmp, double tolerance)
+        public static Rectangle SearchBitmap(Bitmap smallBmp, Bitmap bigBmp, int tol)
         {
+        	double tolerance = tol / 100;
+        	
             BitmapData smallData =
               smallBmp.LockBits(new Rectangle(0, 0, smallBmp.Width, smallBmp.Height),
                        ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
