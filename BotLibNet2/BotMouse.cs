@@ -119,6 +119,7 @@ namespace BotLibNet2
                     break;
             }
             _SendMessage(process, btnDown, 0, LParam);
+            Thread.Sleep(10);
             _SendMessage(process, btnUp, 0, LParam);
         }
 
@@ -141,6 +142,7 @@ namespace BotLibNet2
                     break;
             }
             _SendMessage(process, btnDown, 0, LParam);
+            Thread.Sleep(10);
             _SendMessage(process, btnUp, 0, LParam);
         }
 
