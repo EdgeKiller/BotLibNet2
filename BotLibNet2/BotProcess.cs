@@ -1,9 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: EdgeKiller
- * Date: 03/10/2015
- */
-using System;
+﻿using System;
 using System.Diagnostics;
 
 namespace BotLibNet2

@@ -1,10 +1,4 @@
-﻿/*
- * Created by SharpDevelop.
- * User: EdgeKiller
- * Date: 03/10/2015
- */
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -19,7 +13,7 @@ namespace BotLibNet2
 
 		public BotImage(IntPtr proc)
 		{
-			this.process = proc;
+            process = proc;
 		}
 
 		public Color GetPixelColor(Point pos, bool foregroundMode = false)
@@ -29,7 +23,12 @@ namespace BotLibNet2
 
 		public Bitmap CaptureRegion(Rectangle region, bool foregroundMode = false)
 		{
-			return GetWindowImage(foregroundMode).Clone(new Rectangle(region.X, region.Y, region.Width, region.Height), PixelFormat.Format24bppRgb);
+			return GetWindowImage(foregroundMode).Clone(region, PixelFormat.Format24bppRgb);
+		}
+		
+		public Bitmap CaptureRegion(int x, int y, int width, int height, bool foregroundMode = false)
+		{
+			return GetWindowImage(foregroundMode).Clone(new Rectangle(x, y, width, height), PixelFormat.Format24bppRgb);
 		}
 
 		#region GetScreenImage
